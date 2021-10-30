@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">BasicAuthenticationApp</string>
+    <string name="app_name">Authentication</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="error">Something went wrong … Please try again!</string>
 </resources>
