@@ -21,31 +21,26 @@ import com.coderbot.basicauthenticationapp.presentation.common_views.*
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun LoginScreen(navController: NavHostController, viewModel: LoginViewModel = getViewModel())
+fun Login(navController: NavHostController, viewModel: LoginViewModel = getViewModel())
 {
     val state = viewModel.state.observeAsState()
     val email = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
 
+    LoginView(email, password) {
+        viewModel.intent.value = LoginViewIntents.Login(email.value, password.value)
+    }
+
     when (val viewState = state.value)
     {
-        is LoginViewState.AuthenticatedState ->
-        {
-            println(viewState.user.token)
-            LoginScreenView(email, password)
-        }
+        is LoginViewState.AuthenticatedState -> println(viewState.user.token)
         is LoginViewState.LoadingState -> Loading()
-        is LoginViewState.ErrorState -> Error(stringResource(R.string.error))
-        else -> LoginScreenView(email, password) {
-            viewModel.state.value = LoginViewState.LoadingState
-            viewModel.login(email.value, password.value)
-        }
+        is LoginViewState.ErrorState -> Error(viewState.error.message ?: stringResource(R.string.error))
     }
 }
 
-@Preview(showBackground = true)
 @Composable
-fun LoginScreenView(email: MutableState<String> = mutableStateOf(""), password: MutableState<String> = mutableStateOf(""), loginAction: () -> Unit = {})
+fun LoginView (email: MutableState<String> = mutableStateOf(""), password: MutableState<String> = mutableStateOf(""), loginAction: () -> Unit = {})
 {
     Column(modifier = Modifier
         .fillMaxSize()
@@ -60,4 +55,11 @@ fun LoginScreenView(email: MutableState<String> = mutableStateOf(""), password: 
         Box(modifier = Modifier.height(16.dp))
         ButtonView(label = stringResource(id = R.string.login), action = loginAction)
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun LoginViewPreview()
+{
+    LoginView()
 }

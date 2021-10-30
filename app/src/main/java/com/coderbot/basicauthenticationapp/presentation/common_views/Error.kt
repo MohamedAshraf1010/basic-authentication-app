@@ -1,17 +1,16 @@
 package com.coderbot.basicauthenticationapp.presentation.common_views
 
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Snackbar
-import androidx.compose.material.Text
+import android.widget.Toast
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.platform.LocalContext
 
 @Composable
 fun Error(error: String)
 {
-    Snackbar(
-        action = {},
-        modifier = Modifier.padding(16.dp)
-    ) { Text(text = error) }
+    // Snackbar(
+    //     action = {},
+    //     modifier = Modifier.padding(16.dp)
+    // ) { Text(text = error) }
+
+    Toast.makeText(LocalContext.current, error, Toast.LENGTH_SHORT).show()
 }

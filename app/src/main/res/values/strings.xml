@@ -4,4 +4,5 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="error">Something went wrong … Please try again!</string>
+    <string name="ok">OK</string>
 </resources>

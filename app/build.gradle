@@ -19,8 +19,7 @@ android {
         }
     }
     buildTypes.each {
-        it.buildConfigField "String", "BASE_URL", "\"http://data.fixer.io/api/\""
-        it.buildConfigField "String", "API_KEY", "\"52a78e143d10cb58cd45b6d9ffb666de\""
+        it.buildConfigField "String", "BASE_URL", "\"https://reqres.in/api/\""
     }
     buildTypes {
         release {

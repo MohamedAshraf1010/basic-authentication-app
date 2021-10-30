@@ -5,6 +5,6 @@ import com.coderbot.basicauthenticationapp.data.model.User
 sealed class LoginViewState
 {
     class AuthenticatedState(val user: User) : LoginViewState()
+    class ErrorState(val error: Throwable) : LoginViewState()
     object LoadingState : LoginViewState()
-    object ErrorState : LoginViewState()
 }

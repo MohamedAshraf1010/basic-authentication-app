@@ -17,18 +17,17 @@ import com.coderbot.basicauthenticationapp.presentation.common_views.TextView
 import com.coderbot.basicauthenticationapp.utils.Delay
 
 @Composable
-fun SplashScreen(navController: NavHostController)
+fun Splash(navController: NavHostController)
 {
-    SplashScreenView()
-    Delay.run(5000) {
+    SplashView()
+    Delay.run(10000) {
         navController.popBackStack()
         navController.navigate("login")
     }
 }
 
-@Preview(showBackground = true)
 @Composable
-fun SplashScreenView()
+fun SplashView()
 {
     Column(modifier = Modifier
         .background(color = Color.White)
@@ -37,4 +36,11 @@ fun SplashScreenView()
         Box(modifier = Modifier.height(16.dp))
         TextView(text = stringResource(id = R.string.app_name))
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SplashViewPreview()
+{
+    SplashView()
 }
