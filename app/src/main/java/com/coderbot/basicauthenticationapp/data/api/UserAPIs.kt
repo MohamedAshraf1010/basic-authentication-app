@@ -1,6 +1,7 @@
 package com.coderbot.basicauthenticationapp.data.api
 
 import com.coderbot.basicauthenticationapp.data.api.requests.LoginRequest
+import com.coderbot.basicauthenticationapp.data.api.requests.SignupRequest
 import com.coderbot.basicauthenticationapp.data.model.User
 import retrofit2.http.Body
 import retrofit2.http.Headers
@@ -15,5 +16,11 @@ interface UserAPIs
         @Body request: LoginRequest
         // @Field("email") email: String,
         // @Field("password") password: String,
+    ): User
+
+    @Headers("Content-Type: application/json")
+    @POST("register")
+    suspend fun signup(
+        @Body request: SignupRequest
     ): User
 }

@@ -8,7 +8,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.coderbot.basicauthenticationapp.presentation.login.Login
+import com.coderbot.basicauthenticationapp.presentation.signup.Signup
 import com.coderbot.basicauthenticationapp.presentation.splash.Splash
+import com.coderbot.basicauthenticationapp.presentation.welcome.Welcome
 
 class MainActivity : ComponentActivity()
 {
@@ -25,8 +27,9 @@ fun Application()
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "splash", builder = {
         composable("splash", content = { Splash(navController) })
+        composable("welcome", content = { Welcome(navController) })
         composable("login", content = { Login(navController) })
-        // composable("signup", content = { SignupScreen(navController) })
+        composable("signup", content = { Signup(navController) })
         // composable("home/{data}",
         //     arguments = listOf(navArgument("data", builder = {
         //         type = NavType.StringType

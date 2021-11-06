@@ -14,7 +14,7 @@ class LoginViewModel constructor(private val login: Login) : BaseViewModel<Login
         observeIntents {
             when (it)
             {
-                is LoginViewIntents.Login -> login(it.username, it.password)
+                is LoginViewIntents.Login -> login(it.email, it.password)
             }
         }
     }

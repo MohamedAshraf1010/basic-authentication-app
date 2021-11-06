@@ -5,6 +5,7 @@ import com.coderbot.basicauthenticationapp.data.repository.*
 import com.coderbot.basicauthenticationapp.domain.repository.*
 import com.coderbot.basicauthenticationapp.domain.usecase.*
 import com.coderbot.basicauthenticationapp.presentation.login.LoginViewModel
+import com.coderbot.basicauthenticationapp.presentation.signup.SignupViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -19,7 +20,11 @@ val koinModule = module {
 
     single { Login(get()) }
 
+    single { Signup(get()) }
+
     viewModel { LoginViewModel(get()) }
+
+    viewModel { SignupViewModel(get()) }
 }
 
 fun provideRetrofit(): Retrofit

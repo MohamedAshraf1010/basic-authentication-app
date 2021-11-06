@@ -1,4 +1,4 @@
-package com.coderbot.basicauthenticationapp.presentation.login
+package com.coderbot.basicauthenticationapp.presentation.signup
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -21,26 +21,27 @@ import com.coderbot.basicauthenticationapp.presentation.common_views.*
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun Login(navController: NavHostController, viewModel: LoginViewModel = getViewModel())
+fun Signup(navController: NavHostController, viewModel: SignupViewModel = getViewModel())
 {
     val state = viewModel.state.observeAsState()
     val email = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
+    val passwordConfirmation = remember { mutableStateOf("") }
 
-    LoginView(email, password) {
-        viewModel.intent.value = LoginViewIntents.Login(email.value, password.value)
+    SignupView(email, password, passwordConfirmation) {
+        viewModel.intent.value = SignupViewIntents.Signup(email.value, password.value, passwordConfirmation.value)
     }
 
     when (val viewState = state.value)
     {
-        is LoginViewState.AuthenticatedState -> println(viewState.user.token)
-        is LoginViewState.LoadingState -> Loading()
-        is LoginViewState.ErrorState -> Error(viewState.error.message ?: stringResource(R.string.error))
+        is SignupViewState.AuthenticatedState -> println(viewState.user.token)
+        is SignupViewState.LoadingState -> Loading()
+        is SignupViewState.ErrorState -> Error(viewState.error.message ?: stringResource(R.string.error))
     }
 }
 
 @Composable
-fun LoginView (email: MutableState<String> = mutableStateOf(""), password: MutableState<String> = mutableStateOf(""), loginAction: () -> Unit = {})
+fun SignupView (email: MutableState<String> = mutableStateOf(""), password: MutableState<String> = mutableStateOf(""), passwordConfirmation: MutableState<String> = mutableStateOf(""), signupAction: () -> Unit = {})
 {
     Column(modifier = Modifier
         .fillMaxSize()
@@ -53,13 +54,15 @@ fun LoginView (email: MutableState<String> = mutableStateOf(""), password: Mutab
         Box(modifier = Modifier.height(16.dp))
         InputView(input = password, label = stringResource(id = R.string.password), keyboardType = KeyboardType.Password)
         Box(modifier = Modifier.height(16.dp))
-        ButtonView(label = stringResource(id = R.string.login), width = ButtonWidth.MEDIUM, action = loginAction)
+        InputView(input = passwordConfirmation, label = stringResource(id = R.string.password_confirmation), keyboardType = KeyboardType.Password)
+        Box(modifier = Modifier.height(16.dp))
+        ButtonView(label = stringResource(id = R.string.signup), width = ButtonWidth.MEDIUM, action = signupAction)
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun LoginViewPreview()
+fun SignupViewPreview()
 {
-    LoginView()
+    SignupView()
 }

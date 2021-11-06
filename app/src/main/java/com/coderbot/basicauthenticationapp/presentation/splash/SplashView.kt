@@ -22,7 +22,7 @@ fun Splash(navController: NavHostController)
     SplashView()
     Delay.run(10000) {
         navController.popBackStack()
-        navController.navigate("login")
+        navController.navigate("welcome")
     }
 }
 

@@ -41,7 +41,7 @@ class LoginTest constructor(private var input: Array<String>, private var expect
     fun testLoginProcess()
     {
         runBlocking {
-            Mockito.`when`(repository.login(input[0], input[1])).thenReturn(User(email = input[1], password = input[1], token = "DSHkHDJ876DHH"))
+            Mockito.`when`(repository.login(input[0], input[1])).thenReturn(User(email = input[0], password = input[1], token = "DSHkHDJ876DHH"))
 
             val actualResult = login.run(input[0], input[1])
             Assert.assertNotNull(actualResult.token)

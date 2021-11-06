@@ -1,31 +1,37 @@
 package com.coderbot.basicauthenticationapp
 
+import com.coderbot.basicauthenticationapp.data.model.User
+import com.coderbot.basicauthenticationapp.domain.repository.UserRepository
+import com.coderbot.basicauthenticationapp.domain.usecase.Signup
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert
+import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.junit.runners.Parameterized
+import org.mockito.Mockito
 
-@RunWith(Parameterized::class)
-class SignupTest constructor(private var input: String, private var expectedResult: String)
+class SignupTest
 {
-    companion object
+    private lateinit var signup: Signup
+    private lateinit var repository: UserRepository
+
+    @Before
+    fun initRepository()
     {
-        @JvmStatic
-        @Parameterized.Parameters
-        fun inputs(): Collection<Any>
-        {
-            return arrayOf(
-                arrayOf("t", "t"),
-                arrayOf("t", "t"),
-                arrayOf("t", "t"),
-                arrayOf("t", "t"),
-            ).toList()
-        }
+        repository = Mockito.mock(UserRepository::class.java)
+        signup = Signup(repository)
     }
 
     @Test
     fun testSignupProcess()
     {
-        Assert.assertEquals(expectedResult, input)
+        runBlocking {
+            val expectedResult = User(id= "4", email = "eve.holt@reqres.in", password = "pistol", token = "QpwL5tke4Pnpja7X4")
+            Mockito.`when`(repository.signup("eve.holt@reqres.in", "pistol")).thenReturn(expectedResult)
+
+            val actualResult = signup.run("eve.holt@reqres.in", "pistol", "pistol")
+            Assert.assertNotNull(actualResult.token)
+            Assert.assertEquals(expectedResult.email, actualResult.email)
+            Assert.assertEquals(expectedResult.password, actualResult.password)
+        }
     }
 }
