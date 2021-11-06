@@ -17,3 +17,5 @@
     * APIs: Retrofit.
   * Koin (Dependency Injection).
   * Kotlin Coroutines.
+
+- Used Fake APIs website: reqres.in for simulating login/signup process.
