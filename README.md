@@ -18,4 +18,4 @@
   * Koin (Dependency Injection).
   * Kotlin Coroutines.
 
-- Used Fake APIs website: reqres.in for simulating login/signup process.
+- Used Fake APIs website: https://reqres.in for simulating login/signup process.
